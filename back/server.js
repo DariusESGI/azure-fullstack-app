@@ -5,7 +5,10 @@ const sql = require('mssql');
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors()); // 🔥 Active CORS
+// ✅ Autorise uniquement ton front Azure
+app.use(cors({
+  origin: 'https://mango-wave-0b1f3aa10.6.azurestaticapps.net'
+}));
 
 // Configuration de la base de données
 const config = {
@@ -15,7 +18,7 @@ const config = {
   database: 'fullstack-database',
   options: {
     encrypt: true,
-    trustServerCertificate: false,
+    trustServerCertificate: false
   }
 };
 
@@ -26,7 +29,7 @@ app.get('/api/hello', async (req, res) => {
     const result = await sql.query`SELECT TOP 1 content FROM messages ORDER BY id DESC`;
     res.json({ message: result.recordset[0].content });
   } catch (err) {
-    console.error(err);
+    console.error('Erreur SQL:', err);
     res.status(500).send('Erreur serveur');
   }
 });
