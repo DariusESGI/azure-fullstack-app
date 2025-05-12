@@ -1,7 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const sql = require('mssql');
+
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors()); // 🔥 Active CORS
 
 // Configuration de la base de données
 const config = {
@@ -10,12 +14,12 @@ const config = {
   server: 'sql-fullstack-server.database.windows.net',
   database: 'fullstack-database',
   options: {
-    encrypt: true,              // Obligatoire pour Azure
-    trustServerCertificate: false
+    encrypt: true,
+    trustServerCertificate: false,
   }
 };
 
-// Route API pour lire les messages
+// Route API
 app.get('/api/hello', async (req, res) => {
   try {
     await sql.connect(config);
