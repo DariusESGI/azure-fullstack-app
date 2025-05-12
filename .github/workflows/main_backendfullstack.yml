@@ -1,4 +1,4 @@
-name: Deploy Backend to Azure App Service
+name: Deploy Node.js Backend to Azure
 
 on:
   push:
@@ -10,25 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Install dependencies
-      run: npm install
-      working-directory: ./back
+      - name: Install dependencies
+        run: npm install
+        working-directory: back
 
-    - name: Build (if needed)
-      run: echo "No build step necessary"
-      working-directory: ./back
+      - name: Build project (optional)
+        run: echo "No build step defined for backend"
 
-    - name: Deploy to Azure Web App
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: BackEndFullStack  # ← assure-toi que c’est bien le nom exact dans Azure
-        slot-name: production
-        package: ./back
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: BackEndFullStack
+          slot-name: Production
+          package: ./back
