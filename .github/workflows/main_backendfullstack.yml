@@ -19,12 +19,14 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies (prod + dev)
-        working-directory: back
         run: npm install
+        working-directory: back
 
       - name: Run tests with npx jest
         working-directory: back
-        run: npx jest
+        run: |
+          chmod +x ./node_modules/.bin/jest
+          npx jest
 
       - name: Azure Login
         uses: azure/login@v1
