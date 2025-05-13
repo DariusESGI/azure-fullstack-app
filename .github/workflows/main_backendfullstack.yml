@@ -26,8 +26,9 @@ jobs:
         run: sleep 15
 
       - name: Run tests with npx jest
-        run: npx jest
+        run: chmod +x ./node_modules/.bin/jest && npx jest
         working-directory: back
+
 
       - name: Azure Login
         uses: azure/login@v1
