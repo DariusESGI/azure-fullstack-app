@@ -22,9 +22,9 @@ jobs:
         working-directory: back
         run: npm install
 
-      - name: Run tests with Jest
+      - name: Run tests with npx jest
         working-directory: back
-        run: npm test
+        run: npx jest
 
       - name: Azure Login
         uses: azure/login@v1
