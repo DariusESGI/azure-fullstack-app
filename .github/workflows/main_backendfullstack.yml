@@ -22,11 +22,12 @@ jobs:
         run: npm install
         working-directory: back
 
+      - name: Wait for backend to be ready
+        run: sleep 15
+
       - name: Run tests with npx jest
+        run: npx jest
         working-directory: back
-        run: |
-          chmod +x ./node_modules/.bin/jest
-          npx jest
 
       - name: Azure Login
         uses: azure/login@v1
