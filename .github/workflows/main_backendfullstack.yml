@@ -18,16 +18,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies (avec devDependencies)
-        run: npm install --include=dev
+      - name: Install dependencies (prod + dev)
+        run: npm install
         working-directory: back
 
-      - name: Run tests avec Jest
-        run: npm test
+      - name: Run Jest tests
+        run: npx jest
         working-directory: back
-
-      - name: Build project (optional)
-        run: echo "No build step defined for backend"
 
       - name: Azure Login
         uses: azure/login@v1
