@@ -2,12 +2,18 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Mon App Front Azure</title>
+    <title>Dashboard Fullstack Azure</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Bienvenue sur mon app full stack</h1>
-    <button onclick="direBonjour()">Clique-moi</button>
+    <div class="container">
+        <h1>🌐 Dashboard Fullstack Azure</h1>
+        <div class="card">
+            <h2>🗨️ Message depuis la base de données :</h2>
+            <p id="message">Chargement...</p>
+            <button onclick="chargerMessage()">🔁 Rafraîchir</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
